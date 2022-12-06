@@ -1,19 +1,28 @@
-import { Routes, Route } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import Palette from "./Palette";
 import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
-import Home from "./Home";
+import CallPalette from "./CallPalette";
+
+function findPalette(id) {
+  return seedColors.find((palette) => palette.id === id);
+}
+
+const router = createBrowserRouter([
+  {
+    path: "/palette/:id",
+    loader: ({ params }) => {
+      return generatePalette(findPalette(params.id));
+    },
+    element: <CallPalette />,
+  },
+]);
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/palette/:id" element={<Home />} />
-    </Routes>
-    // <div className="App">
-    //   <Palette palette={generatePalette(seedColors[4])} />
-    // </div>
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
