@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useParams, useLoaderData } from "react-router-dom";
+import { useParams, useLoaderData, Link } from "react-router-dom";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
-import "./Palette.css";
 import PaletteFooter from "./PaletteFooter";
 
 export default function SingleColorPalette(props) {
@@ -34,14 +33,21 @@ export default function SingleColorPalette(props) {
     />
   ));
   return (
-    <div className="Palette">
+    <div className="SingleColorPalette Palette">
       <Navbar
         showLevel={false}
         format={format}
         onChangeFormat={changeFormatHandler}
       />
 
-      <div className="Palette-colors">{colorBoxes}</div>
+      <div className="Palette-colors">
+        {colorBoxes}
+        <div className="back-div ColorBox">
+          <Link className="back-button" to={`/palette/${palette.id}`}>
+            Go Back
+          </Link>
+        </div>
+      </div>
       <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
     </div>
   );
