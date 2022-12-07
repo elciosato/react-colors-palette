@@ -1,10 +1,18 @@
+import { useState } from "react";
 import { useParams, useLoaderData } from "react-router-dom";
 import ColorBox from "./ColorBox";
+import Navbar from "./Navbar";
 import "./Palette.css";
+import PaletteFooter from "./PaletteFooter";
 
 export default function SingleColorPalette(props) {
-  const { paletteId, colorId } = useParams();
+  const [format, setFormat] = useState("hex");
+  const { colorId } = useParams();
   const palette = useLoaderData();
+
+  function changeFormatHandler(format) {
+    setFormat(format);
+  }
 
   function gatherShades() {
     const colors = [];
@@ -20,15 +28,21 @@ export default function SingleColorPalette(props) {
   const colorBoxes = colorShades.map((color, index) => (
     <ColorBox
       key={index}
-      background={color["hex"]}
+      background={color[format]}
       name={color.name}
       showMoreLink={false}
     />
   ));
   return (
     <div className="Palette">
-      <h1>Single color palette</h1>
+      <Navbar
+        showLevel={false}
+        format={format}
+        onChangeFormat={changeFormatHandler}
+      />
+
       <div className="Palette-colors">{colorBoxes}</div>
+      <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
     </div>
   );
 }
