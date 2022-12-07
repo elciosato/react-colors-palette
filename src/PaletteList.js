@@ -10,7 +10,7 @@ const styles = {
     justifyContent: "center",
   },
   container: {
-    width: "50%",
+    width: "60%",
     display: "flex",
     alignItems: "flex-start",
     flexDirection: "column",
@@ -40,7 +40,9 @@ function PaletteList(props) {
         </nav>
         <div className={classes.palettes}>
           {palettes.map((palette) => (
-            <MiniPalette key={palette.id} {...palette} />
+            <div key={palette.id}>
+              <MiniPalette key={palette.id} {...palette} />
+            </div>
           ))}
         </div>
       </div>

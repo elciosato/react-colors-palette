@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import seedColors from "./seedColors";
+import { seedColors } from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 import CallPalette from "./CallPalette";
 import PaletteList from "./PaletteList";

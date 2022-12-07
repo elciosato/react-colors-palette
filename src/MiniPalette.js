@@ -1,4 +1,5 @@
 import { withStyles } from "@mui/styles";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   root: {
@@ -14,7 +15,7 @@ const styles = {
   },
   colors: {
     backgroundColor: "#dae1e4",
-    height: "150px",
+    height: "120px",
     width: "100%",
     borderRadius: "5px",
     overflow: "hidden",
@@ -25,13 +26,13 @@ const styles = {
     alignItems: "center",
     margin: "0",
     color: "black",
-    paddingTop: "0.5rem",
-    fontSize: "1rem",
+    paddingTop: "0.2rem",
+    fontSize: "0.8rem",
     position: "relative",
   },
   emoji: {
-    margiLeft: "0.5rem",
-    fontSize: "1.5rem",
+    marginLeft: "0.5rem",
+    fontSize: "1rem",
   },
   miniColor: {
     height: "25%",
@@ -43,7 +44,9 @@ const styles = {
   },
 };
 function MiniPalette(props) {
-  const { classes, paletteName, emoji, colors } = props;
+  let navigate = useNavigate();
+
+  const { classes, paletteName, emoji, colors, id } = props;
   const miniColorBoxes = colors.map((color) => (
     <div
       key={color.name}
@@ -51,8 +54,13 @@ function MiniPalette(props) {
       style={{ backgroundColor: color.color }}
     />
   ));
+
+  function clickHandler() {
+    navigate(`/palette/${id}`);
+  }
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={clickHandler}>
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>
