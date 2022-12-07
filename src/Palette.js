@@ -29,6 +29,7 @@ export default class Palette extends Component {
           key={color.id}
           background={color[this.state.format]}
           name={color.name}
+          showMoreLink={true}
           moreUrl={`/palette/${this.props.palette.id}/${color.id}`}
         />
       )

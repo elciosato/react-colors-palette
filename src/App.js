@@ -24,6 +24,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/palette/:paletteId/:colorId",
+    loader: ({ params }) => {
+      return generatePalette(findPalette(params.paletteId));
+    },
     element: <SingleColorPalette />,
   },
 ]);
