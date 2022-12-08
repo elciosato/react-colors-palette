@@ -5,6 +5,7 @@ import { generatePalette } from "./colorHelpers";
 import CallPalette from "./CallPalette";
 import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
+import NewPaletteForm from "./NewPaletteForm";
 
 function findPalette(id) {
   return seedColors.find((palette) => palette.id === id);
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <PaletteList palettes={seedColors} />,
+  },
+  {
+    path: "/palette/new",
+    element: <NewPaletteForm />,
   },
   {
     path: "/palette/:id",
