@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -62,7 +62,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function NewPaletteForm(props) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(true);
+  const [currentColor, setCurrentColor] = useState("teal");
+  const [colors, setColors] = useState(["purple", "#e15764"]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -72,6 +74,13 @@ export default function NewPaletteForm(props) {
     setOpen(false);
   };
 
+  const changeCurrentColorHandler = (newColor) => {
+    setCurrentColor(newColor.hex);
+  };
+
+  const addColorHandler = () => {
+    setColors((prevState) => [...prevState, currentColor]);
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -119,13 +128,28 @@ export default function NewPaletteForm(props) {
             Random Color
           </Button>
         </div>
-        <ChromePicker color="purple" />
-        <Button variant="contained" color="primary">
+        <ChromePicker
+          color={currentColor}
+          onChangeComplete={changeCurrentColorHandler}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: currentColor }}
+          onClick={addColorHandler}
+        >
           Add Color
         </Button>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
+        <ul>
+          {colors.map((color, index) => (
+            <li key={index} style={{ backgroundColor: color }}>
+              {color}
+            </li>
+          ))}
+        </ul>
       </Main>
     </Box>
   );
