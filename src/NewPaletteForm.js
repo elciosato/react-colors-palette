@@ -10,8 +10,10 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { ChromePicker } from "react-color";
+import { Button } from "@mui/material";
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -108,6 +110,19 @@ export default function NewPaletteForm(props) {
           </IconButton>
         </DrawerHeader>
         <Divider />
+        <Typography variant="h4">Design Your Palette</Typography>
+        <div>
+          <Button variant="contained" color="secondary">
+            Clear Palette
+          </Button>
+          <Button variant="contained" color="primary">
+            Random Color
+          </Button>
+        </div>
+        <ChromePicker color="purple" />
+        <Button variant="contained" color="primary">
+          Add Color
+        </Button>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
