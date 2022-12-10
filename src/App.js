@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import { seedColors } from "./seedColors";
@@ -7,36 +8,41 @@ import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPaletteForm from "./NewPaletteForm";
 
-function findPalette(id) {
-  return seedColors.find((palette) => palette.id === id);
-}
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <PaletteList palettes={seedColors} />,
-  },
-  {
-    path: "/palette/new",
-    element: <NewPaletteForm />,
-  },
-  {
-    path: "/palette/:id",
-    loader: ({ params }) => {
-      return generatePalette(findPalette(params.id));
-    },
-    element: <CallPalette />,
-  },
-  {
-    path: "/palette/:paletteId/:colorId",
-    loader: ({ params }) => {
-      return generatePalette(findPalette(params.paletteId));
-    },
-    element: <SingleColorPalette />,
-  },
-]);
-
 function App() {
+  const [palettes, setPalettes] = useState(seedColors);
+
+  function findPalette(id) {
+    return palettes.find((palette) => palette.id === id);
+  }
+
+  function savePaletteHandler(newPalette) {
+    setPalettes((prevState) => [...prevState, newPalette]);
+  }
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <PaletteList palettes={palettes} />,
+    },
+    {
+      path: "/palette/new",
+      element: <NewPaletteForm onSavePalette={savePaletteHandler} />,
+    },
+    {
+      path: "/palette/:id",
+      loader: ({ params }) => {
+        return generatePalette(findPalette(params.id));
+      },
+      element: <CallPalette />,
+    },
+    {
+      path: "/palette/:paletteId/:colorId",
+      loader: ({ params }) => {
+        return generatePalette(findPalette(params.paletteId));
+      },
+      element: <SingleColorPalette />,
+    },
+  ]);
   return (
     <div className="App">
       <RouterProvider router={router} />
