@@ -31,11 +31,11 @@ export default class ColorBox extends Component {
           />
           <div className={`copy-msg ${isCopied && "show"}`}>
             <h1>copied!</h1>
-            <p className={isLightColor && "dark-text"}>{background}</p>
+            <p className={isLightColor ? "dark-text" : ""}>{background}</p>
           </div>
           <div className="copy-container">
             <div className="box-content">
-              <span className={isDarkColor && "light-text"}>{name}</span>
+              <span className={isDarkColor ? "light-text" : ""}>{name}</span>
             </div>
             <button className={`copy-button ${isLightColor && "dark-text"}`}>
               Copy
