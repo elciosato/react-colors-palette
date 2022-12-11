@@ -13,8 +13,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ChromePicker } from "react-color";
 import { Button } from "@mui/material";
-import DraggableColorBox from "./DraggableColorBox";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import DraggableColorList from "./DraggableColorList";
+import { arrayMoveImmutable } from "array-move";
 
 const drawerWidth = 400;
 
@@ -145,6 +146,10 @@ export default function NewPaletteForm(props) {
     );
   };
 
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setColors((color) => arrayMoveImmutable(color, oldIndex, newIndex));
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -236,14 +241,12 @@ export default function NewPaletteForm(props) {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {colors.map((color, index) => (
-          <DraggableColorBox
-            key={index}
-            color={color.color}
-            name={color.name}
-            onClickDelete={clickDeleteHandler}
-          />
-        ))}
+        <DraggableColorList
+          colors={colors}
+          onClickDelete={clickDeleteHandler}
+          onSortEnd={onSortEnd}
+          axis="xy"
+        />
       </Main>
     </Box>
   );
