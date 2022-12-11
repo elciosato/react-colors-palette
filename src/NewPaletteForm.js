@@ -139,6 +139,12 @@ export default function NewPaletteForm(props) {
     navigate("/");
   };
 
+  const clickDeleteHandler = (colorName) => {
+    setColors((prevState) =>
+      prevState.filter((color) => color.name !== colorName)
+    );
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -235,6 +241,7 @@ export default function NewPaletteForm(props) {
             key={index}
             color={color.color}
             name={color.name}
+            onClickDelete={clickDeleteHandler}
           />
         ))}
       </Main>
