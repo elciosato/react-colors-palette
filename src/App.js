@@ -26,7 +26,12 @@ function App() {
     },
     {
       path: "/palette/new",
-      element: <NewPaletteForm onSavePalette={savePaletteHandler} />,
+      element: (
+        <NewPaletteForm
+          palettes={palettes}
+          onSavePalette={savePaletteHandler}
+        />
+      ),
     },
     {
       path: "/palette/:id",
