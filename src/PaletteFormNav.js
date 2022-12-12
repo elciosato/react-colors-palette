@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
@@ -8,13 +7,9 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Button } from "@mui/material";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import PaletteFormDialog from "./PaletteFormDialog";
 
 export default function PaletteFormNav(props) {
-  const navigate = useNavigate();
-
-  const [newPaletteName, setNewPaletteName] = useState("");
-
   const {
     drawerWidth,
     open,
@@ -23,15 +18,6 @@ export default function PaletteFormNav(props) {
     colors,
     onSavePalette,
   } = props;
-
-  useEffect(() => {
-    ValidatorForm.addValidationRule("isPaletteNameUnique", (value) => {
-      return palettes.every(
-        (palette) =>
-          palette.paletteName.toLowerCase() !== value.toLowerCase().trim()
-      );
-    });
-  }, [palettes]);
 
   const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
@@ -50,21 +36,6 @@ export default function PaletteFormNav(props) {
     }),
   }));
 
-  const changePaletteNameHandle = (event) => {
-    setNewPaletteName(event.target.value);
-  };
-
-  const savePaletteHandler = (event) => {
-    event.preventDefault();
-    const newPalette = {
-      id: newPaletteName.toLowerCase().trim().replace(/ /g, "-"),
-      paletteName: newPaletteName.trim(),
-      colors,
-    };
-    onSavePalette(newPalette);
-    navigate("/");
-  };
-
   return (
     <div>
       <CssBaseline />
@@ -81,32 +52,18 @@ export default function PaletteFormNav(props) {
           </IconButton>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Typography variant="h6" noWrap component="div">
-              Persistent drawer
+              Create Palette
             </Typography>
-            <ValidatorForm
-              style={{ display: "flex" }}
-              onSubmit={savePaletteHandler}
-            >
-              <TextValidator
-                label="Palette Name"
-                name="newPaletteName"
-                value={newPaletteName}
-                onChange={changePaletteNameHandle}
-                validators={["required", "isPaletteNameUnique"]}
-                errorMessages={[
-                  "Enter Palette Name. This field is required",
-                  "Palette Name must be unique",
-                ]}
-              />
-              <Button variant="contained" color="primary" type="submit">
-                Save Palette
+            <PaletteFormDialog
+              palettes={palettes}
+              colors={colors}
+              onSavePalette={onSavePalette}
+            />
+            <Link to="/">
+              <Button variant="contained" color="secondary" type="button">
+                Go Back
               </Button>
-              <Link to="/">
-                <Button variant="contained" color="secondary" type="button">
-                  Go Back
-                </Button>
-              </Link>
-            </ValidatorForm>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
