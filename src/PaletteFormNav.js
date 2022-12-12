@@ -50,20 +50,28 @@ export default function PaletteFormNav(props) {
           >
             <MenuIcon />
           </IconButton>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
             <Typography variant="h6" noWrap component="div">
               Create Palette
             </Typography>
-            <PaletteFormDialog
-              palettes={palettes}
-              colors={colors}
-              onSavePalette={onSavePalette}
-            />
-            <Link to="/">
-              <Button variant="contained" color="secondary" type="button">
-                Go Back
-              </Button>
-            </Link>
+            <div
+              style={{
+                display: "flex",
+                marginLeft: "auto",
+                gap: "0.5rem",
+              }}
+            >
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <Button variant="contained" color="secondary" type="button">
+                  Go Back
+                </Button>
+              </Link>
+              <PaletteFormDialog
+                palettes={palettes}
+                colors={colors}
+                onSavePalette={onSavePalette}
+              />
+            </div>
           </div>
         </Toolbar>
       </AppBar>
