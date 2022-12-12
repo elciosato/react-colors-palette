@@ -7,6 +7,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { useNavigate } from "react-router-dom";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 
 export default function PaletteFormDialog(props) {
   const { palettes, colors, onSavePalette } = props;
@@ -63,6 +65,7 @@ export default function PaletteFormDialog(props) {
               Please enter a name for your new beautiful palette. Make sure it's
               unique
             </DialogContentText>
+            <Picker data={data} onEmojiSelect={console.log} />
             <TextValidator
               label="Palette Name"
               name="newPaletteName"
