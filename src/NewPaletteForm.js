@@ -27,7 +27,7 @@ export default function NewPaletteForm(props) {
     ({ theme, open }) => ({
       flexGrow: 1,
       height: "calc(100vh - 64px)",
-      padding: theme.spacing(3),
+      padding: "0",
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
