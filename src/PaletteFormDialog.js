@@ -16,6 +16,7 @@ export default function PaletteFormDialog(props) {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
+  const [stage, setStage] = useState("close");
   const [newPaletteName, setNewPaletteName] = useState("");
 
   useEffect(() => {
@@ -28,24 +29,32 @@ export default function PaletteFormDialog(props) {
   }, [palettes]);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    // setOpen(true);
+    setStage("form");
   };
 
   const handleClose = () => {
-    setOpen(false);
+    // setOpen(false);
+    setStage("close");
     setNewPaletteName("");
+  };
+
+  const showEmojiPicker = (event) => {
+    event.preventDefault();
+    setStage("emoji");
   };
 
   const changePaletteNameHandle = (event) => {
     setNewPaletteName(event.target.value);
   };
 
-  const savePaletteHandler = (event) => {
-    event.preventDefault();
+  const savePaletteHandler = (emoji) => {
+    setStage("close");
     const newPalette = {
       id: newPaletteName.toLowerCase().trim().replace(/ /g, "-"),
       paletteName: newPaletteName.trim(),
       colors,
+      emoji: emoji.native,
     };
     onSavePalette(newPalette);
     handleClose();
@@ -54,18 +63,22 @@ export default function PaletteFormDialog(props) {
 
   return (
     <div>
+      <Dialog open={stage === "emoji"} onClose={handleClose}>
+        <DialogTitle>Choose a Palette Emoji</DialogTitle>
+        <Picker data={data} onEmojiSelect={savePaletteHandler} />
+      </Dialog>
       <Button variant="contained" color="success" onClick={handleClickOpen}>
         Save Palette
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={stage === "form"} onClose={handleClose}>
         <DialogTitle>Choose a Palette Name</DialogTitle>
-        <ValidatorForm onSubmit={savePaletteHandler}>
+        <ValidatorForm onSubmit={showEmojiPicker}>
           <DialogContent>
             <DialogContentText>
               Please enter a name for your new beautiful palette. Make sure it's
               unique
             </DialogContentText>
-            <Picker data={data} onEmojiSelect={console.log} />
+
             <TextValidator
               label="Palette Name"
               name="newPaletteName"
