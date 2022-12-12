@@ -116,29 +116,40 @@ export default function NewPaletteForm(props) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Typography variant="h4">Design Your Palette</Typography>
-        <div>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={clickClearPaletteHandler}
-          >
-            Clear Palette
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={clickRandomColorHandler}
-            disabled={isPaletteFull}
-          >
-            Random Color
-          </Button>
+        <div
+          style={{
+            height: "80%",
+            width: "90%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h4">Design Your Palette</Typography>
+          <div>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={clickClearPaletteHandler}
+            >
+              Clear Palette
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={clickRandomColorHandler}
+              disabled={isPaletteFull}
+            >
+              Random Color
+            </Button>
+          </div>
+          <ColorPickerForm
+            isPaletteFull={isPaletteFull}
+            colors={colors}
+            onClickAddColor={clickAddColorHandler}
+          />
         </div>
-        <ColorPickerForm
-          isPaletteFull={isPaletteFull}
-          colors={colors}
-          onClickAddColor={clickAddColorHandler}
-        />
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
