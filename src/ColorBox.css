@@ -8,20 +8,6 @@
   margin-bottom: -3.5px;
 }
 
-@media (max-width: 950px) {
-  .ColorBox {
-    width: 50%;
-    height: 10%;
-  }
-}
-
-@media (max-width: 500px) {
-  .ColorBox {
-    width: 100%;
-    height: 5%;
-  }
-}
-
 .SingleColorPalette .ColorBox {
   height: 50%;
 }
@@ -135,7 +121,7 @@
 }
 
 .copy-msg h1 {
-  font-height: 400;
+  font-weight: 400;
   text-shadow: 1px 2px black;
   background: rgba(255, 255, 255, 0.2);
   width: 100%;
@@ -148,4 +134,30 @@
 .copy-msg p {
   font-size: 2rem;
   font-weight: 100;
+}
+
+@media (max-width: 950px) {
+  .ColorBox {
+    width: 50%;
+    height: 10%;
+  }
+
+  .SingleColorPalette .ColorBox {
+    width: 50%;
+    height: 20%;
+  }
+}
+
+@media (max-width: 500px) {
+  .ColorBox {
+    width: 100%;
+    height: 5%;
+  }
+  .SingleColorPalette .ColorBox {
+    width: 100%;
+    height: 10%;
+  }
+  .copy-msg h1 {
+    font-size: 4rem;
+  }
 }
