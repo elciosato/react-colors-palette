@@ -13,15 +13,11 @@ function App() {
   const [palettes, setPalettes] = useState(savedPalettes || seedColors);
 
   useEffect(() => {
-    syncPaletteLocalStorage();
+    window.localStorage.setItem("palettes", JSON.stringify(palettes));
   }, [palettes]);
 
   function findPalette(id) {
     return palettes.find((palette) => palette.id === id);
-  }
-
-  function syncPaletteLocalStorage() {
-    window.localStorage.setItem("palettes", JSON.stringify(palettes));
   }
 
   function savePaletteHandler(newPalette) {
