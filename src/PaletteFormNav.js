@@ -62,8 +62,13 @@ export default function PaletteFormNav(props) {
               }}
             >
               <Link to="/" style={{ textDecoration: "none" }}>
-                <Button variant="contained" color="secondary" type="button">
-                  Go Back
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="secondary"
+                  type="button"
+                >
+                  Back
                 </Button>
               </Link>
               <PaletteFormDialog

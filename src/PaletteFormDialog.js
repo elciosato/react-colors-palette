@@ -67,8 +67,13 @@ export default function PaletteFormDialog(props) {
         <DialogTitle>Choose a Palette Emoji</DialogTitle>
         <Picker data={data} onEmojiSelect={savePaletteHandler} />
       </Dialog>
-      <Button variant="contained" color="success" onClick={handleClickOpen}>
-        Save Palette
+      <Button
+        size="small"
+        variant="contained"
+        color="success"
+        onClick={handleClickOpen}
+      >
+        Save
       </Button>
       <Dialog open={stage === "form"} onClose={handleClose}>
         <DialogTitle>Choose a Palette Name</DialogTitle>

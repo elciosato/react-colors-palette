@@ -64,6 +64,7 @@ export default class Navbar extends Component {
           <Select
             id="format"
             name="format"
+            size="small"
             value={this.state.format}
             onChange={this.changeFormatHandler}
           >
