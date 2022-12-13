@@ -24,10 +24,21 @@ function App() {
     setPalettes((prevState) => [...prevState, newPalette]);
   }
 
+  function deletePaletteHandler(id) {
+    setPalettes((prevState) =>
+      prevState.filter((palette) => palette.id !== id)
+    );
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <PaletteList palettes={palettes} />,
+      element: (
+        <PaletteList
+          palettes={palettes}
+          onClickDeletePalette={deletePaletteHandler}
+        />
+      ),
     },
     {
       path: "/palette/new",

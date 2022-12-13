@@ -36,7 +36,7 @@ const styles = {
   },
 };
 function PaletteList(props) {
-  const { palettes, classes } = props;
+  const { palettes, classes, onClickDeletePalette } = props;
   return (
     <div className={classes.root}>
       <div className={classes.container}>
@@ -47,7 +47,11 @@ function PaletteList(props) {
         <div className={classes.palettes}>
           {palettes.map((palette) => (
             <div key={palette.id}>
-              <MiniPalette key={palette.id} {...palette} />
+              <MiniPalette
+                key={palette.id}
+                {...palette}
+                onClickDeletePalette={onClickDeletePalette}
+              />
             </div>
           ))}
         </div>
