@@ -8,6 +8,20 @@
   margin-bottom: -3.5px;
 }
 
+@media (max-width: 950px) {
+  .ColorBox {
+    width: 50%;
+    height: 10%;
+  }
+}
+
+@media (max-width: 500px) {
+  .ColorBox {
+    width: 100%;
+    height: 5%;
+  }
+}
+
 .SingleColorPalette .ColorBox {
   height: 50%;
 }
