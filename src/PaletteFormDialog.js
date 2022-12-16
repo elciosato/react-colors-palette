@@ -15,7 +15,6 @@ export default function PaletteFormDialog(props) {
 
   const navigate = useNavigate();
 
-  const [open, setOpen] = useState(false);
   const [stage, setStage] = useState("close");
   const [newPaletteName, setNewPaletteName] = useState("");
 
